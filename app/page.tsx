@@ -13,6 +13,7 @@ export default function Home() {
 			<WorkFlow />
 			<Divider />
 			<Pricing />
+			<Divider />
 		</main>
 	);
 }

@@ -8,7 +8,7 @@ export default function BgGradient({
     className?: string
 }){
     return(
-        <div className="relative isolate">
+        <div className={`${className ? "" : "relative"} isolate`}>
             <div aria-hidden="true" className="pointer-events-none absolute inset-x-0 -top-40 -z-10 transform-gpu overflow-hidden blur-3xl sm:-top-80">
                 <div style={{
                     clipPath: "polygon(50% 0%, 61% 35%, 98% 35%, 68% 57%, 79% 91%, 50% 70%, 21% 91%, 32% 57%, 2% 35%, 39% 35%)"

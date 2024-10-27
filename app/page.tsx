@@ -1,6 +1,7 @@
 import BgGradient from "@/components/common/bg-gradient";
 import Divider from "@/components/common/divider";
 import Banner from "@/components/home/banner";
+import Footer from "@/components/home/footer";
 import Pricing from "@/components/home/pricing";
 import WorkFlow from "@/components/home/workflow";
 
@@ -14,6 +15,7 @@ export default function Home() {
 			<Divider />
 			<Pricing />
 			<Divider />
+			<Footer />
 		</main>
 	);
 }

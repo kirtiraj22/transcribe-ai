@@ -3,24 +3,25 @@ export const plansMap = [
 		id: "basic",
 		name: "Basic",
 		description: "Get started with TranscribeAI!",
-		price: "10",
+		price: "840",
 		items: ["3 Blog Posts", "3 Transcription"],
-		paymentLink: "https://buy.stripe.com/test_aEUbLVe0V06B064bII",
+		paymentLink: "https://buy.stripe.com/test_6oEdSK9zpbwG5Zm000",
 		priceId:
 			process.env.NODE_ENV === "development"
-				? "price_1Nxq8qEZq07q777777777777"
+				? "price_1QEmfmSHDuqZovb7mreRB9A7"
 				: "",
 	},
+
 	{
 		id: "pro",
 		name: "Pro",
 		description: "All Blog Posts, let's go!",
-		price: "19.99",
+		price: "1680",
 		items: ["unlimited Blog Posts", "Unlimited Transcriptions"],
-		paymentLink: "https://buy.stripe.com/test_aEUbLVe0V06B064bII",
+		paymentLink: "https://buy.stripe.com/test_8wM01U26XfMW4Vi8wx",
 		priceId:
 			process.env.NODE_ENV === "development"
-				? "price_1Nxq8qEZq07q777777777777"
+				? "price_1QEmhcSHDuqZovb7Ev6GlWD8"
 				: "",
 	},
 ];

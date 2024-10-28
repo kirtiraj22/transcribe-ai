@@ -55,11 +55,11 @@ export default function Pricing() {
 									</div>
 									<div className="flex gap-2">
 										<p className="text-5xl tracking-tight font-extrabold">
-											${price}
+											₹{price}
 										</p>
 										<div className="flex flex-col justify-end mb-[4px]">
 											<p className="text-xs text-base-content/60 uppercase font-semibold">
-												USD
+												INR
 											</p>
 											<p className="text-xs text-base-content/60">
 												/month

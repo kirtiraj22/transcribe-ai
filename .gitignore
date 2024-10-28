@@ -9,6 +9,9 @@
 # environment variables
 .env
 
+# stripe local
+stripe.local.txt
+
 # testing
 /coverage
 

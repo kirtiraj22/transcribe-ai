@@ -21,7 +21,7 @@ export async function POST(req: NextRequest) {
                 const paymentIntentSucceeded = event.data.object;
                 console.log({ paymentIntentSucceeded })
             }
-            
+
 			case "checkout.session.completed": {
 				const session = await stripe.checkout.sessions.retrieve(
 					event.data.object.id,
@@ -35,6 +35,8 @@ export async function POST(req: NextRequest) {
 
             case "customer.subscription.deleted": {
                 const subscriptionId = event.data.object.id;
+                const subscription = await stripe.subscriptions.retrieve(subscriptionId)
+                console.log(subscription)
                 break;
             }
             default: 
@@ -48,21 +50,3 @@ export async function POST(req: NextRequest) {
 		console.log(error);
 	}
 }
-
-// try {
-//     event = stripe
-// } catch (err) {
-//     response.status(400).send(`Webhook Error: ${err.message}`);
-//     return;
-// }
-
-// // Handle the event
-// switch (event.type) {
-//     case "payment_intent.succeeded":
-//         const paymentIntentSucceeded = event.data.object;
-//         // Then define and call a function to handle the event payment_intent.succeeded
-//         break;
-//     // ... handle other event types
-//     default:
-//         console.log(`Unhandled event type ${event.type}`);
-// }

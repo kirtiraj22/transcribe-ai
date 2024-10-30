@@ -21,6 +21,23 @@ export async function handleCheckoutSessionCompleted({
     }
 }
 
+export async function handleSubscriptionDeleted({
+    subscriptionId,
+    stripe
+}: {
+    subscriptionId: string,
+    stripe: Stripe
+}){
+    try{
+        const subscription = await stripe.subscriptions.retrieve(subscriptionId);
+        const sql = await getDbConnection();
+        await sql`UPDATE users SET status = 'cancelled' WHERE customer_id = ${subscription.customer}`
+    }catch(err){
+        console.error("Error while handling stripe subscription deletion!", err)
+        throw err;
+    }
+}
+
 async function createOrUpdateUser(
 	sql: any,
 	customer: Stripe.Customer,

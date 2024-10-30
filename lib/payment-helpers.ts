@@ -1,4 +1,26 @@
 import Stripe from "stripe";
+import getDbConnection from "./db";
+
+export async function handleCheckoutSessionCompleted({
+    session,
+    stripe
+}: {
+    session: Stripe.Checkout.Session,
+    stripe: Stripe
+}){
+    const customerId = session.customer as string;
+    const customer = await stripe.customers.retrieve(customerId);
+    const priceId = session.line_items?.data[0].price?.id;
+
+    const sql = await getDbConnection();
+
+    if("email" in customer && priceId){
+        await createOrUpdateUser(sql, customer, customerId);
+        await updateUserSubscription(sql, priceId, customer.email as string)
+        await insertPayment(sql, session, priceId, customer.email as string);
+    }
+}
+
 async function createOrUpdateUser(
 	sql: any,
 	customer: Stripe.Customer,

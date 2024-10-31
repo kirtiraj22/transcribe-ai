@@ -18,7 +18,16 @@ export async function handleCheckoutSessionCompleted({
         await createOrUpdateUser(sql, customer, customerId);
         await updateUserSubscription(sql, priceId, customer.email as string)
         await insertPayment(sql, session, priceId, customer.email as string);
+	await cancelPayment();
     }
+}
+
+export async function canncelPayment(){
+	try{
+	
+	}catch(err){
+	    console.error("Error while cancelling payment!");
+	}
 }
 
 export async function handleSubscriptionDeleted({

@@ -33,3 +33,12 @@ export function getPlanType(priceId: string){
     const checkPlanType = plansMap.filter((plan) => plan.priceId === priceId);
     return checkPlanType?.[0];
 }
+
+export async function hasCancelledSubscription(
+    sql: NeonQueryFunction<false,false>,
+    email: string
+){
+    const query = await sql`SELECT * FROM users WHERE email = ${email} AND status = 'cancelled'`
+
+    return query && query.length > 0;
+}

@@ -11,13 +11,15 @@ export async function handleCheckoutSessionCompleted({
 	const customerId = session.customer as string;
 	const customer = await stripe.customers.retrieve(customerId);
 	const priceId = session.line_items?.data[0].price?.id;
-
+	console.log("customer : ", customer);
+	console.log("priceId of customer: ",priceId);
 	const sql = await getDbConnection();
 
 	if ("email" in customer && priceId) {
 		await createOrUpdateUser(sql, customer, customerId);
 		await updateUserSubscription(sql, priceId, customer.email as string);
 		await insertPayment(sql, session, priceId, customer.email as string);
+		console.log("Checkout session completed!")
 	}
 }
 
@@ -52,7 +54,9 @@ async function createOrUpdateUser(
 		const user =
 			await sql`SELECT * FROM users WHERE email = ${customer.email}`;
 		if (user.length === 0) {
-			await sql`INSERT INTO users (email, full_name, customer_id) VALUES (${customer.email}, ${customer.name}, ${customerId}})`;
+			console.log("Inserting User in DB!")
+			await sql`INSERT INTO users (email, full_name, customer_id) VALUES (${customer.email}, ${customer.name}, ${customerId})`;
+			console.log("User inserted in table!")
 		}
 	} catch (err) {
 		console.error("Error in inserting user", err);

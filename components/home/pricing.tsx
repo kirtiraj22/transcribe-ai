@@ -81,7 +81,7 @@ export default function Pricing() {
 										<Button
 											variant="link"
 											className={cn(
-												"border-2 rounded-xl bg-black text-gray-100 shadow-lg hover:bg-black hover:no-underline relative after:bg-indigo-500 after:rounded-2xl after:absolute after:h-[4px] after:w-0 after:bottom-0 after:left-0 hover:after:w-full after:transition-all after:duration-500 cursor-pointer",
+												"border-2 rounded-lg bg-black text-gray-100 shadow-lg hover:bg-black hover:no-underline relative after:bg-indigo-500 after:rounded-2xl after:absolute after:h-[4px] after:w-0 after:bottom-0 after:left-0 hover:after:w-full after:transition-all after:duration-500 cursor-pointer",
 												id === "pro" &&
 													" border-amber-300 px-4 after:bg-amber-600"
 											)}

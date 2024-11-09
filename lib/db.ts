@@ -6,5 +6,6 @@ export default async function getDbConnection() {
 	}
 
 	const sql = neon(process.env.DATABASE_URL);
+	console.log("Successfully connected to DB!")
 	return sql;
 }

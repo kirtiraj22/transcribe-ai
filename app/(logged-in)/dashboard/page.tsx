@@ -10,6 +10,7 @@ import { currentUser } from "@clerk/nextjs/server";
 import { redirect } from "next/navigation";
 import { Badge } from "@/components/ui/badge";
 import UpgradePlan from "@/components/upload/upgradePlan";
+import UploadForm from "@/components/upload/upload-form";
 
 export default async function Dashboard() {
 	const clerkUser = await currentUser();
@@ -27,7 +28,7 @@ export default async function Dashboard() {
 
 	const hasUserCancelled = await hasCancelledSubscription(sql, email);
 	const user = await doesUserExist(sql, email);
-	console.log("User : ", user);
+	// console.log("User : ", user);
 	if (user) {
 		userId = clerkUser?.id;
 		if (userId) {
@@ -42,10 +43,10 @@ export default async function Dashboard() {
 
 	const isBasicPlan = planTypeId === "basic";
 	const isProPlan = planTypeId === "pro";
-
+	
 	return (
-		<div className="mx-auto max-w-7xl px-6 py-24 sm:py-32 lg:px-8">
-			<BgGradient />
+		<div className="mx-auto max-w-7xl px-6 py-22 sm:py-32 lg:px-8 overflow-hidden max-h-[80vh]">
+			<BgGradient/>
 			<div className="flex flex-col items-center justify-center gap-6 text-center">
 				<Badge className="group bg-gradient-to-r from-purple-700 to-pink-800 text-white px-6 py-1 text-lg font-semibold hover:bg-gradient-to-r">
 					{planTypeName} Plan
@@ -69,9 +70,9 @@ export default async function Dashboard() {
 						Plan.
 					</p>
 				)}
-                <UpgradePlan />
+				<UpgradePlan />
+				<UploadForm />
 			</div>
-			<BgGradient />
 		</div>
 	);
 }

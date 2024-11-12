@@ -8,6 +8,7 @@ export const ourFileRouter = {
     videoOrAudioUploader: f({ video: {
         maxFileSize: "32MB"
     }}).middleware(async ({ req }) => {
+        console.log("Video/audio slug started")
         const user = await currentUser();
         console.log( { user })
 

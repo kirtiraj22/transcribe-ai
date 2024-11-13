@@ -1,3 +1,4 @@
+import getDbConnection from "@/lib/db";
 import OpenAI from "openai";
 
 const openai = new OpenAI({
@@ -72,6 +73,19 @@ export async function transcribeUploadedFile(
     }
 }
 
+async function getUserBlogPosts(userId: string){
+    try{
+        const sql = await getDbConnection();
+        const posts = await sql`
+        SELECT content FROM posts WHERE user_id = ${userId} ORDER BY created_at DESC LIMIT 3
+        `;
+
+        return posts.map((post) => post.content).join("\n\n")
+    }catch(error){
+        console.error("Error getting user blog posts", error);
+        throw error;
+    }
+}
 
 async function generateBlogPost({
     transcriptions,

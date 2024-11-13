@@ -126,3 +126,33 @@ async function generateBlogPost({
 
     return completion.choices[0].message.content;
 }
+
+export async function generateBlogPostAction({
+    transcriptions,
+    userId
+}: {
+    transcriptions: {
+        text: string
+    };
+    userId: string
+}){
+    const userPosts = await getUserBlogPosts(userId);
+    let postId = null;
+
+    if(transcriptions){
+        const blogPost = await generateBlogPost({
+            transcriptions: transcriptions.text,
+            userPosts
+        })
+
+        if(!blogPost){
+            return{
+                success: true,
+                message: "Blog post generation failed, please try again...",
+            }
+        }   
+
+        const [title, ...contentParts] = blogPost?.split("\n\n") || [];
+
+    }
+}

@@ -4,6 +4,7 @@ import { Button } from "../ui/button";
 import { Input } from "../ui/input";
 import { z } from "zod";
 import { useUploadThing } from "@/utils/uploadthing";
+import { transcribeUploadedFile } from "@/actions/upload-actions";
 const schema = z.object({
 	file: z
 		.instanceof(File, {
@@ -72,6 +73,8 @@ export default function UploadForm() {
                 description: "Hang tight! Our digital wizards are sprinkling magic dust on your file! ✨"
             })
 
+            const result = await transcribeUploadedFile(response)
+            
         }
     }
 	return (

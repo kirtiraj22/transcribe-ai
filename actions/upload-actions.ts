@@ -87,6 +87,19 @@ async function getUserBlogPosts(userId: string){
     }
 }
 
+async function saveBlogPost(userId: string, title: string, content: string){
+    try{
+        const sql = await getDbConnection();
+
+        const [insertedPost] = await sql`INSERT INTO posts (user_id, title, content) VALUES (${userId}, ${title}, ${content}) RETURNING id`
+
+        return insertedPost.id;
+    }catch(error){
+        console.error("Error saving blog post", error);
+        throw error;
+    }
+}
+
 async function generateBlogPost({
     transcriptions,
     userPosts
